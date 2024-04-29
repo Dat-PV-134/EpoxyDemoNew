@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.MainActivity"
+        android:background="@color/white">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/btnVerticalList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vertical list"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:background="#FB9E9E"
+                    android:textSize="20sp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:paddingVertical="16dp"/>
+
+                <TextView
+                    android:id="@+id/btnHorizontalList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Horizontal list"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:background="#84A2D6"
+                    android:textSize="20sp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:paddingVertical="16dp"/>
+
+                <TextView
+                    android:id="@+id/btnTwoTypeList1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mutil Type list 1"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:background="#6FE3D2"
+                    android:textSize="20sp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:paddingVertical="16dp"/>
+
+                <TextView
+                    android:id="@+id/btnTwoTypeList2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mutil Type list 2"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:background="#85D182"
+                    android:textSize="20sp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:paddingVertical="16dp"/>
+
+                <TextView
+                    android:id="@+id/btnSpecicalList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Special list"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:background="#000000"
+                    android:textSize="20sp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:paddingVertical="16dp"/>
+            </LinearLayout>
+        </ScrollView>
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
