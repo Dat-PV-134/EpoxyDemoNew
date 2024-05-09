@@ -1,4 +1,4 @@
-## Project demo cách sử dụng Epoxy với data trong việc thiết kế một số giao diện Recycler View cơ bản
+## Project demo cách sử dụng Epoxy với data binding trong việc thiết kế một số giao diện Recycler View cơ bản
 
 Đường dẫn tới lib Epoxy: 
 ```sh
