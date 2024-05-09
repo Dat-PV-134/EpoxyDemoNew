@@ -159,12 +159,13 @@ class VerticalListController : EpoxyController() {
     override fun buildModels() {
         listImage.forEach { item ->
             itemImage {
+                // Lưu ý id của mỗi Model phải khác nhau
                 id(item.id)
                 url(item.src)
                 isFavorite(this@VerticalListController.setImageSelected.contains(item.id))
                 onClick { _ ->
-                    if (setImageSelected.contains(item.id)) setImageSelected.remove(item.id)
-                    else setImageSelected.add(item.id)
+                    if (this@VerticalListController.setImageSelected.contains(item.id)) this@VerticalListController.setImageSelected.remove(item.id)
+                    else this@VerticalListController.setImageSelected.add(item.id)
                     // Sau khi thay đổi trạng thái của Model. Hãy gọi requestModelBuild() để Epoxy nhận biết sự thay đổi và build lại Model đấy
                     this@VerticalListController.requestModelBuild()
                 }
@@ -194,23 +195,37 @@ binding.verticalRecyclerView.withModels {
         itemImage {
             id(item.id)
             url(item.src)
-            isFavorite(this@VerticalListController.setImageSelected.contains(item.id))
+            isFavorite(setImageSelected.contains(item.id))
             onClick { _ ->
                 if (setImageSelected.contains(item.id)) setImageSelected.remove(item.id)
                 else setImageSelected.add(item.id)
                 requestModelBuild()
             }
         }
+
+//         Một cách khác để build Model
+//         listImage.forEach { item ->
+//             ItemImageBindingModel_()
+//                   .id(item.id)
+//                   .url(item.src)
+//                   .isFavorite(setImageSelected.contains(item.id))
+//                   .onClick {
+//                        if (setImageSelected.contains(item.id)) setImageSelected.remove(item.id)
+//                        else setImageSelected.add(item.id)
+//                        requestModelBuild()
+//                   }
+//                   .addTo(this@withModels)
+//        }
     }
 }
 ```
 
-Vậy là bạn đã nắm qua được cách sử dụng Epoxy để xử lý các giao diện list cơ bản. 
-Hãy thử nghiệm các case trong project demo trên để nắm rõ hơn nữa khả năng của thư viện tuyệt vời này, các case trong project bao gồm:
-    + Basic vertical list + Move item
-    + Basic horizontal list
-    + Multi type item with nested list (unlimit horizontal lists inside a vertical list)
-    + Multi type item + custom span size in grid list
-    + List with expandable items that have list in expanded content
+## Vậy là bạn đã nắm qua được cách sử dụng Epoxy để xử lý các giao diện list cơ bản. 
+## Hãy thử nghiệm các case trong project demo trên để nắm rõ hơn nữa khả năng của thư viện tuyệt vời này, các case trong project bao gồm:
+    - Basic vertical list + Move item
+    - Basic horizontal list
+    - Multi type item with nested list (unlimit horizontal lists inside a vertical list)
+    - Multi type item + custom span size in grid list
+    - List with expandable items that have list in expanded content
 
 
