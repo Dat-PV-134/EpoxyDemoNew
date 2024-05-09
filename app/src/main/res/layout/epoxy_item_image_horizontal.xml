@@ -5,8 +5,12 @@
 
     <data>
         <variable
-            name="imageItem"
-            type="com.rekoj134.epoxydemonew.model.Image"/>
+            name="url"
+            type="String" />
+
+        <variable
+            name="isSelected"
+            type="Boolean" />
 
         <variable
             name="onClick"
@@ -24,8 +28,8 @@
             android:layout_height="250dp"
             android:contentDescription="@null"
             app:layout_constraintEnd_toEndOf="parent"
-            bind:imageUrl="@{imageItem.src}"
-            bind:isSelected="@{imageItem.selected}"
+            bind:imageUrl="@{url}"
+            bind:isSelected="@{isSelected}"
             android:onClick="@{onClick}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

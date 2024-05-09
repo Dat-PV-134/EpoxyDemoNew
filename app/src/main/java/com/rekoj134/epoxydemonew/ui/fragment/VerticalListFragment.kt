@@ -1,5 +1,6 @@
 package com.rekoj134.epoxydemonew.ui.fragment
 
+import android.media.Image
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,8 +9,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.EpoxyTouchHelper
+import com.bumptech.glide.util.Util
 import com.rekoj134.epoxydemonew.R
 import com.rekoj134.epoxydemonew.databinding.FragmentVerticalListBinding
 import com.rekoj134.epoxydemonew.epoxy.controller.VerticalListController
@@ -32,7 +35,10 @@ class VerticalListFragment : Fragment(R.layout.fragment_vertical_list) {
         setupRecyclerView()
         handleEvent()
 
-//        binding.verticalRecyclerView.requestModelBuild()
+        /*
+        Other way to build models
+
+        binding.verticalRecyclerView.requestModelBuild()
         binding.verticalRecyclerView.withModels {
 
             if (listData.isEmpty()){
@@ -44,8 +50,6 @@ class VerticalListFragment : Fragment(R.layout.fragment_vertical_list) {
                 itemImage {
                     id(image.id)
                     url(image.src)
-
-                    isFavorite(image.isSelected)
                     onClick { v ->
                         image.copy(id, )
                         favListData.add(image)
@@ -58,8 +62,6 @@ class VerticalListFragment : Fragment(R.layout.fragment_vertical_list) {
                 itemImage {
                     id(image.id)
                     url(image.src)
-
-                    isFavorite(image.isSelected)
                     onClick { v ->
                         image.copy(id, )
                         favListData.add(image)
@@ -70,6 +72,7 @@ class VerticalListFragment : Fragment(R.layout.fragment_vertical_list) {
 
             itemLoadingItem {  }
         }
+        */
     }
 
     private fun handleEvent() {
@@ -93,6 +96,7 @@ class VerticalListFragment : Fragment(R.layout.fragment_vertical_list) {
     private fun setupRecyclerView() {
         controller = VerticalListController()
 
+        // Drag item setup
         EpoxyTouchHelper.initDragging(controller)
             .withRecyclerView(binding.verticalRecyclerView)
             .forGrid()

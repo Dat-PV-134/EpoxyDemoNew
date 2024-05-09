@@ -13,7 +13,7 @@ import com.rekoj134.epoxydemonew.ui.fragment.VerticalListFragment
 import com.rekoj134.epoxydemonew.R
 import com.rekoj134.epoxydemonew.databinding.ActivityMainBinding
 import com.rekoj134.epoxydemonew.ui.fragment.HorizontalListFragment
-import com.rekoj134.epoxydemonew.ui.fragment.SpecialListFragment
+import com.rekoj134.epoxydemonew.ui.fragment.ExpandableListFragment
 import com.rekoj134.epoxydemonew.ui.fragment.TwoTypeList1Fragment
 import com.rekoj134.epoxydemonew.ui.fragment.TwoTypeList2Fragment
 
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnSpecicalList.setOnClickListener {
-            replaceFragment(SpecialListFragment())
+            replaceFragment(ExpandableListFragment())
         }
     }
 

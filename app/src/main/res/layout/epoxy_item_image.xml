@@ -6,15 +6,11 @@
 
     <data>
         <variable
-            name="imageItem"
-            type="com.rekoj134.epoxydemonew.model.Image"/>
-
-        <variable
             name="url"
             type="String" />
 
         <variable
-            name="isFavorite"
+            name="isSelected"
             type="Boolean" />
 
         <variable
@@ -34,8 +30,8 @@
             android:layout_height="100dp"
             android:contentDescription="@null"
             app:layout_constraintEnd_toEndOf="parent"
-            bind:imageUrl="@{imageItem.src}"
-            bind:isSelected="@{imageItem.selected}"
+            bind:imageUrl="@{url}"
+            bind:isSelected="@{isSelected}"
             android:onClick="@{onClick}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -43,9 +43,9 @@ class TwoTypeList2Fragment: Fragment(R.layout.fragment_two_type_list_2) {
 
         binding.twoType2RecyclerView.setControllerAndBuildModels(controller)
         Handler(Looper.getMainLooper()).postDelayed({
-            controller.listImage2 = DataUtil.getListTwoType2()
-            controller.listImage3 = DataUtil.getListTwoType2()
-            controller.listImage4 = DataUtil.getListTwoType2()
+            controller.listImage2 = DataUtil.getListTwoType2Different1()
+            controller.listImage3 = DataUtil.getListTwoType2Different2()
+            controller.listImage4 = DataUtil.getListTwoType2Different3()
         }, 3000)
     }
 

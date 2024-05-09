@@ -8,15 +8,16 @@ import com.rekoj134.epoxydemonew.itemLoadingFull
 import com.rekoj134.epoxydemonew.itemLoadingItem
 import com.rekoj134.epoxydemonew.model.Image
 
-class VerticalListController : AsyncEpoxyController() {
+class VerticalListController : EpoxyController() {
     var listImage: ArrayList<Image> = ArrayList()
         set(value) {
             field = value
             requestModelBuild()
         }
 
-    override fun buildModels() {
+    private var setImageSelected = HashSet<Int>()
 
+    override fun buildModels() {
         if (listImage.isEmpty()) {
             itemLoadingFull {
                 id("loading_full")
@@ -31,15 +32,17 @@ class VerticalListController : AsyncEpoxyController() {
         listImage.forEach { item ->
             itemImage {
                 id(item.id)
-                imageItem(item)
+                url(item.src)
                 onClick { _ ->
-                    this@VerticalListController.onItemSelected(item)
+                    if (this@VerticalListController.setImageSelected.contains(item.id)) this@VerticalListController.setImageSelected.remove(item.id)
+                    else this@VerticalListController.setImageSelected.add(item.id)
+                    this@VerticalListController.requestModelBuild()
                 }
-                spanSizeOverride { totalSpanCount, position, itemCount ->
-//                    if (position == 4) totalSpanCount
-//                    else 1
-                    1
-                }
+                isSelected(this@VerticalListController.setImageSelected.contains(item.id))
+                // If you want to make it contain full space of grid layout line. Just override span size
+//                spanSizeOverride { totalSpanCount, position, itemCount ->
+//                    totalSpanCount
+//                }
             }
         }
 
@@ -51,20 +54,5 @@ class VerticalListController : AsyncEpoxyController() {
                 }
             }
         }
-    }
-
-    private fun onItemSelected(imageSelected: Image) {
-        val tempList = ArrayList<Image>()
-        this@VerticalListController.listImage.forEach {
-            if (it.id == imageSelected.id) {
-                val tempItem = it.copy()
-                tempItem.isSelected = !tempItem.isSelected
-                tempList.add(tempItem)
-            } else {
-                tempList.add(it)
-            }
-        }
-        Log.e("ANCUTKO", "temp " + tempList.toString())
-        this@VerticalListController.listImage = tempList
     }
 }

@@ -1,15 +1,11 @@
 package com.rekoj134.epoxydemonew.epoxy.controller
 
 import android.content.Context
-import android.util.Log
 import android.view.Gravity
 import androidx.recyclerview.widget.SnapHelper
 import com.airbnb.epoxy.Carousel
 import com.airbnb.epoxy.EpoxyController
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
-import com.rekoj134.epoxydemonew.ItemImageBindingModel_
-import com.rekoj134.epoxydemonew.epoxy.extension.carousel
-import com.rekoj134.epoxydemonew.epoxy.extension.withModelsFrom
 import com.rekoj134.epoxydemonew.itemImage
 import com.rekoj134.epoxydemonew.itemLoadingItem
 import com.rekoj134.epoxydemonew.itemTitleSelectAll
@@ -40,6 +36,8 @@ class TwoTypeList2Controller : EpoxyController() {
         requestModelBuild()
     }
 
+    private var setImageSelected = HashSet<Int>()
+
     override fun buildModels() {
         Carousel.setDefaultGlobalSnapHelperFactory(object : Carousel.SnapHelperFactory() {
             override fun buildSnapHelper(context: Context?): SnapHelper {
@@ -69,9 +67,14 @@ class TwoTypeList2Controller : EpoxyController() {
             listImage1.forEach { item ->
                 itemImage {
                     id("list_1_" + item.id)
-                    imageItem(item)
+                    url(item.src)
+                    isSelected(this@TwoTypeList2Controller.setImageSelected.contains(item.id))
                     onClick { _ ->
-                        this@TwoTypeList2Controller.onItemSelected(item, 1)
+                        if (this@TwoTypeList2Controller.setImageSelected.contains(item.id)) this@TwoTypeList2Controller.setImageSelected.remove(
+                            item.id
+                        )
+                        else this@TwoTypeList2Controller.setImageSelected.add(item.id)
+                        this@TwoTypeList2Controller.requestModelBuild()
                     }
                     spanSizeOverride { totalSpanCount, position, itemCount ->
                         1
@@ -102,9 +105,14 @@ class TwoTypeList2Controller : EpoxyController() {
             listImage2.forEach { item ->
                 itemImage {
                     id("list_2_" + item.id)
-                    imageItem(item)
+                    url(item.src)
+                    isSelected(this@TwoTypeList2Controller.setImageSelected.contains(item.id))
                     onClick { _ ->
-                        this@TwoTypeList2Controller.onItemSelected(item, 2)
+                        if (this@TwoTypeList2Controller.setImageSelected.contains(item.id)) this@TwoTypeList2Controller.setImageSelected.remove(
+                            item.id
+                        )
+                        else this@TwoTypeList2Controller.setImageSelected.add(item.id)
+                        this@TwoTypeList2Controller.requestModelBuild()
                     }
                     spanSizeOverride { totalSpanCount, position, itemCount ->
                         1
@@ -135,9 +143,14 @@ class TwoTypeList2Controller : EpoxyController() {
             listImage3.forEach { item ->
                 itemImage {
                     id("list_3_" + item.id)
-                    imageItem(item)
+                    url(item.src)
+                    isSelected(this@TwoTypeList2Controller.setImageSelected.contains(item.id))
                     onClick { _ ->
-                        this@TwoTypeList2Controller.onItemSelected(item, 3)
+                        if (this@TwoTypeList2Controller.setImageSelected.contains(item.id)) this@TwoTypeList2Controller.setImageSelected.remove(
+                            item.id
+                        )
+                        else this@TwoTypeList2Controller.setImageSelected.add(item.id)
+                        this@TwoTypeList2Controller.requestModelBuild()
                     }
                     spanSizeOverride { totalSpanCount, position, itemCount ->
                         1
@@ -168,9 +181,14 @@ class TwoTypeList2Controller : EpoxyController() {
             listImage4.forEach { item ->
                 itemImage {
                     id("list_4_" + item.id)
-                    imageItem(item)
+                    url(item.src)
+                    isSelected(this@TwoTypeList2Controller.setImageSelected.contains(item.id))
                     onClick { _ ->
-                        this@TwoTypeList2Controller.onItemSelected(item, 4)
+                        if (this@TwoTypeList2Controller.setImageSelected.contains(item.id)) this@TwoTypeList2Controller.setImageSelected.remove(
+                            item.id
+                        )
+                        else this@TwoTypeList2Controller.setImageSelected.add(item.id)
+                        this@TwoTypeList2Controller.requestModelBuild()
                     }
                     spanSizeOverride { totalSpanCount, position, itemCount ->
                         1
@@ -181,54 +199,28 @@ class TwoTypeList2Controller : EpoxyController() {
     }
 
     private fun onSelectAll(listPosition: Int) {
-        val tempList = ArrayList<Image>()
-        val listForSearch = when (listPosition) {
-            1 -> listImage1
-            2 -> listImage2
-            3 -> listImage3
-            4 -> listImage4
-            else -> listImage1
-        }
-        listForSearch.forEach {
-            val tempItem = it.copy()
-            tempItem.isSelected = true
-            tempList.add(tempItem)
-        }
-        Log.e("ANCUTKO", "temp " + tempList.toString())
         when (listPosition) {
-            1 -> listImage1 = tempList
-            2 -> listImage2 = tempList
-            3 -> listImage3 = tempList
-            4 -> listImage4 = tempList
-            else -> listImage1 = tempList
-        }
-    }
-
-    private fun onItemSelected(imageSelected: Image, listPosition: Int) {
-        val tempList = ArrayList<Image>()
-        val listForSearch = when (listPosition) {
-            1 -> listImage1
-            2 -> listImage2
-            3 -> listImage3
-            4 -> listImage4
-            else -> listImage1
-        }
-        listForSearch.forEach {
-            if (it.id == imageSelected.id) {
-                val tempItem = it.copy()
-                tempItem.isSelected = !tempItem.isSelected
-                tempList.add(tempItem)
-            } else {
-                tempList.add(it)
+            1 -> {
+                listImage1.forEach {
+                    setImageSelected.add(it.id)
+                }
+            }
+            2 -> {
+                listImage2.forEach {
+                    setImageSelected.add(it.id)
+                }
+            }
+            3 -> {
+                listImage3.forEach {
+                    setImageSelected.add(it.id)
+                }
+            }
+            4 -> {
+                listImage4.forEach {
+                    setImageSelected.add(it.id)
+                }
             }
         }
-        Log.e("ANCUTKO", "temp " + tempList.toString())
-        when (listPosition) {
-            1 -> listImage1 = tempList
-            2 -> listImage2 = tempList
-            3 -> listImage3 = tempList
-            4 -> listImage4 = tempList
-            else -> listImage1 = tempList
-        }
+        requestModelBuild()
     }
 }

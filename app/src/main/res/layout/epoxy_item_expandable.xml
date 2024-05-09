@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="java.util.ArrayList" />
+
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="isExpand"
+            type="Boolean" />
+
+        <variable
+            name="data"
+            type="ArrayList&lt;String&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#A3ACE1"
+        android:onClick="@{onClick}">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Tap to expand"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.epoxy.Carousel
+            android:id="@+id/listItem"
+            bind:data="@{data}"
+            bind:visibility="@{isExpand}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

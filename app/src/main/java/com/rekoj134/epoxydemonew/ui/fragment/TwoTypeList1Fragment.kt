@@ -32,9 +32,9 @@ class TwoTypeList1Fragment : Fragment(R.layout.fragment_two_type_list_1) {
         binding.twoType1RecyclerView.setControllerAndBuildModels(controller)
         Handler(Looper.getMainLooper()).postDelayed({
             controller.listImage1 = DataUtil.getVerticalListData2()
-            controller.listImage2 = DataUtil.getVerticalListData2()
-            controller.listImage3 = DataUtil.getVerticalListData2()
-            controller.listImage4 = DataUtil.getVerticalListData2()
+            controller.listImage2 = DataUtil.getVerticalListData2DifferentId2()
+            controller.listImage3 = DataUtil.getVerticalListData2DifferentId3()
+            controller.listImage4 = DataUtil.getVerticalListData2DifferentId4()
         }, 3000)
     }
 

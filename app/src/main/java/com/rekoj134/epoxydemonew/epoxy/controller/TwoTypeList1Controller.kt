@@ -42,6 +42,7 @@ class TwoTypeList1Controller : AsyncEpoxyController() {
             requestModelBuild()
         }
 
+    private var setImageSelected = HashSet<Int>()
 
     override fun buildModels() {
         Carousel.setDefaultGlobalSnapHelperFactory(object : Carousel.SnapHelperFactory() {
@@ -68,8 +69,14 @@ class TwoTypeList1Controller : AsyncEpoxyController() {
                 id("list_1_container")
                 numViewsToShowOnScreen(2.5f)
                 this@TwoTypeList1Controller.listImage1.forEach {
-                    listModel_.add(ItemImageBindingModel_().id("list_1_" + it.id).imageItem(it).onClick { _ ->
-                        this@TwoTypeList1Controller.onItemSelected(it, 1)
+                    listModel_.add(ItemImageBindingModel_()
+                        .id("list_1_" + it.id)
+                        .url(it.src)
+                        .isSelected(this@TwoTypeList1Controller.setImageSelected.contains(it.id))
+                        .onClick { _ ->
+                            if (this@TwoTypeList1Controller.setImageSelected.contains(it.id)) this@TwoTypeList1Controller.setImageSelected.remove(it.id)
+                            else this@TwoTypeList1Controller.setImageSelected.add(it.id)
+                            this@TwoTypeList1Controller.requestModelBuild()
                     })
                 }
                 if (listModel_.size < 6) listModel_.add(ItemLoadingItemBindingModel_().id("loading_item_in_list_1"))
@@ -95,8 +102,14 @@ class TwoTypeList1Controller : AsyncEpoxyController() {
                 numViewsToShowOnScreen(3f)
 
                 withModelsFrom(this@TwoTypeList1Controller.listImage2) {
-                    ItemImageBindingModel_().id("list_2_" + it.id).imageItem(it).onClick { _ ->
-                        this@TwoTypeList1Controller.onItemSelected(it, 2)
+                    ItemImageBindingModel_()
+                        .id("list_2_" + it.id)
+                        .url(it.src)
+                        .isSelected(this@TwoTypeList1Controller.setImageSelected.contains(it.id))
+                        .onClick { _ ->
+                            if (this@TwoTypeList1Controller.setImageSelected.contains(it.id)) this@TwoTypeList1Controller.setImageSelected.remove(it.id)
+                            else this@TwoTypeList1Controller.setImageSelected.add(it.id)
+                            this@TwoTypeList1Controller.requestModelBuild()
                     }
                 }
             }
@@ -120,8 +133,14 @@ class TwoTypeList1Controller : AsyncEpoxyController() {
                 numViewsToShowOnScreen(3.5f)
 
                 withModelsFrom(this@TwoTypeList1Controller.listImage3) {
-                    ItemImageBindingModel_().id("list_3_" + it.id).imageItem(it).onClick { _ ->
-                        this@TwoTypeList1Controller.onItemSelected(it, 3)
+                    ItemImageBindingModel_()
+                        .id("list_3_" + it.id)
+                        .url(it.src)
+                        .isSelected(this@TwoTypeList1Controller.setImageSelected.contains(it.id))
+                        .onClick { _ ->
+                            if (this@TwoTypeList1Controller.setImageSelected.contains(it.id)) this@TwoTypeList1Controller.setImageSelected.remove(it.id)
+                            else this@TwoTypeList1Controller.setImageSelected.add(it.id)
+                            this@TwoTypeList1Controller.requestModelBuild()
                     }
                 }
             }
@@ -145,8 +164,14 @@ class TwoTypeList1Controller : AsyncEpoxyController() {
                 numViewsToShowOnScreen(4f)
 
                 withModelsFrom(this@TwoTypeList1Controller.listImage4) {
-                    ItemImageBindingModel_().id("list_4_" + it.id).imageItem(it).onClick { _ ->
-                        this@TwoTypeList1Controller.onItemSelected(it, 4)
+                    ItemImageBindingModel_()
+                        .id("list_4_" + it.id)
+                        .url(it.src)
+                        .isSelected(this@TwoTypeList1Controller.setImageSelected.contains(it.id))
+                        .onClick { _ ->
+                            if (this@TwoTypeList1Controller.setImageSelected.contains(it.id)) this@TwoTypeList1Controller.setImageSelected.remove(it.id)
+                            else this@TwoTypeList1Controller.setImageSelected.add(it.id)
+                            this@TwoTypeList1Controller.requestModelBuild()
                     }
                 }
             }
@@ -154,54 +179,28 @@ class TwoTypeList1Controller : AsyncEpoxyController() {
     }
 
     private fun onSelectAll(listPosition: Int) {
-        val tempList = ArrayList<Image>()
-        val listForSearch = when (listPosition) {
-            1 -> listImage1
-            2 -> listImage2
-            3 -> listImage3
-            4 -> listImage4
-            else -> listImage1
-        }
-        listForSearch.forEach {
-            val tempItem = it.copy()
-            tempItem.isSelected = true
-            tempList.add(tempItem)
-        }
-        Log.e("ANCUTKO", "temp " + tempList.toString())
         when (listPosition) {
-            1 -> listImage1 = tempList
-            2 -> listImage2 = tempList
-            3 -> listImage3 = tempList
-            4 -> listImage4 = tempList
-            else -> listImage1 = tempList
-        }
-    }
-
-    private fun onItemSelected(imageSelected: Image, listPosition: Int) {
-        val tempList = ArrayList<Image>()
-        val listForSearch = when (listPosition) {
-            1 -> listImage1
-            2 -> listImage2
-            3 -> listImage3
-            4 -> listImage4
-            else -> listImage1
-        }
-        listForSearch.forEach {
-            if (it.id == imageSelected.id) {
-                val tempItem = it.copy()
-                tempItem.isSelected = !tempItem.isSelected
-                tempList.add(tempItem)
-            } else {
-                tempList.add(it)
+            1 -> {
+                listImage1.forEach {
+                    setImageSelected.add(it.id)
+                }
+            }
+            2 -> {
+                listImage2.forEach {
+                    setImageSelected.add(it.id)
+                }
+            }
+            3 -> {
+                listImage3.forEach {
+                    setImageSelected.add(it.id)
+                }
+            }
+            4 -> {
+                listImage4.forEach {
+                    setImageSelected.add(it.id)
+                }
             }
         }
-        Log.e("ANCUTKO", "temp " + tempList.toString())
-        when (listPosition) {
-            1 -> listImage1 = tempList
-            2 -> listImage2 = tempList
-            3 -> listImage3 = tempList
-            4 -> listImage4 = tempList
-            else -> listImage1 = tempList
-        }
+        requestModelBuild()
     }
 }

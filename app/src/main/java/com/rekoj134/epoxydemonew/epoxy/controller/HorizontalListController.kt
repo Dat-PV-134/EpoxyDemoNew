@@ -14,6 +14,8 @@ class HorizontalListController : EpoxyController() {
             requestModelBuild()
         }
 
+    private var setImageSelected = HashSet<Int>()
+
     override fun buildModels() {
 
         if (listImage.isEmpty()) {
@@ -30,10 +32,12 @@ class HorizontalListController : EpoxyController() {
         listImage.forEach { item ->
             itemImageHorizontal {
                 id(item.id)
-                imageItem(item)
                 onClick { _ ->
-                    this@HorizontalListController.onItemSelected(item)
+                    if (this@HorizontalListController.setImageSelected.contains(item.id)) this@HorizontalListController.setImageSelected.remove(item.id)
+                    else this@HorizontalListController.setImageSelected.add(item.id)
+                    this@HorizontalListController.requestModelBuild()
                 }
+                isSelected(this@HorizontalListController.setImageSelected.contains(item.id))
                 spanSizeOverride { totalSpanCount, position, itemCount ->
 //                    if (position == 4) totalSpanCount
 //                    else 1
