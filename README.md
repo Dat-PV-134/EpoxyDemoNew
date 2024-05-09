@@ -186,6 +186,7 @@ controller.listImage = DataUtil.getVerticalListData1()
 ```
 
 Cách 2: Sử dụng withModels
+Gọi thẳng withModels trong Epoxy recyclerview để build các Model
 
 ```sh
 var setImageSelected = HashSet<Int>()
