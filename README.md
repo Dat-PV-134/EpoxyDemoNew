@@ -176,7 +176,7 @@ class VerticalListController : EpoxyController() {
 ```
 
 - Sau đó gọi setControllerAndBuildModels ở Epoxy RecyclerView. Và thế là xong =))) 
-- (Cách 2 dành cho trường hợp list không quá phức tạp và sẽ còn ngắn gọn hơn nữa) 
+(Cách 2 dành cho trường hợp list không quá phức tạp và sẽ còn ngắn gọn hơn nữa) 
 
 ```sh
 binding.verticalRecyclerView.setControllerAndBuildModels(VerticalListController())
@@ -185,7 +185,7 @@ binding.verticalRecyclerView.setControllerAndBuildModels(VerticalListController(
 controller.listImage = DataUtil.getVerticalListData1()
 ```
 
-- cách 2: Sử dụng withModels
+Cách 2: Sử dụng withModels
 - Gọi thẳng withModels trong Epoxy recyclerview để build các Model
 
 ```sh
