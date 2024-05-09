@@ -89,6 +89,18 @@ object EpoxyDataBindingConfig
 </layout>
 ```
 
+- bind:imageUrl và bind:isSelected được sử dụng để load image bằng Glide
+
+```sh
+@BindingAdapter("bind:imageUrl", "bind:isSelected")
+fun loadImage(view: ImageView, url: String?, isSelected: Boolean) {
+    Log.e("ANCUTKO", isSelected.toString())
+    Glide.with(view.context)
+        .load(if (!isSelected) Uri.parse("file:///android_asset/" + url) else Uri.parse("file:///android_asset/background/50.webp"))
+        .error(Uri.parse("file:///android_asset/background/50.webp")).into(view)
+}
+```
+
 Lưu ý sau khi tạo, nhớ build lại Project để dataBinding và Epoxy tạo ra các Models cho mình
 
 - Tạo 1 data class để lấy dữ liệu cần thiết
@@ -118,6 +130,8 @@ data class Image(
 
 #### 5. Tạo 1 Controller cho EpoxyRecyclerView
 
+Cách 1: Tạo 1 class Controller
+
 ```sh
 package com.rekoj134.epoxydemonew.epoxy.controller
 
@@ -138,8 +152,8 @@ class VerticalListController : EpoxyController() {
             requestModelBuild()
         }
 
-    // Map này để xử lý những đối tượng bạn muốn thay đổi trạng thái khi click
-    var mapImageSelected = HashMap<Int, Boolean?>()
+    // Set này để xử lý những đối tượng bạn muốn thay đổi trạng thái khi click
+    var setImageSelected = HashSet<Int>()
 
     // Khi kế thừa EpoxyController, cần override phương thức buildModels.
     // Tại đây chúng ta sẽ cho Epoxy Recycler View biết mình muốn hiển thị dữ liệu theo thứ tự cũng như cách thức thế nào
@@ -148,12 +162,11 @@ class VerticalListController : EpoxyController() {
             itemImage {
                 id(item.id)
                 url(item.src)
-                isFavorite(this@VerticalListController.mapImageSelected[item.id] ?: false)
+                isFavorite(this@VerticalListController.setImageSelected.contains(item.id))
                 onClick { _ ->
-                    val isSelected = this@VerticalListController.mapImageSelected[item.id] ?: false
-                    this@VerticalListController.mapImageSelected[item.id] = !isSelected
-
-                    // Sau khi thay đổi trạng thái của Models mà bạn muốn. Hãy gọi requestModelBuild() để Epoxy nhận biết sự thay đổi và build lại Model đấy
+                    if (setImageSelected.contains(item.id)) setImageSelected.remove(item.id)
+                    else setImageSelected.add(item.id)
+                    // Sau khi thay đổi trạng thái của Model. Hãy gọi requestModelBuild() để Epoxy nhận biết sự thay đổi và build lại Model đấy
                     this@VerticalListController.requestModelBuild()
                 }
             }
@@ -162,4 +175,43 @@ class VerticalListController : EpoxyController() {
 }
 ```
 
-To be continues, coming soon.....
+Sau đó gọi setControllerAndBuildModels ở Epoxy RecyclerView. Và thế là xong =))) 
+(Cách 2 dành cho trường hợp list không quá phức tạp và sẽ còn ngắn gọn hơn nữa) 
+
+```sh
+binding.verticalRecyclerView.setControllerAndBuildModels(VerticalListController())
+
+// Set dữ liệu cho list, Khi set dữ liệu cho list chúng ta đã gọi requestModelBuild() vậy nên Controller sẽ build lại những item bị thay đổi trong đó.
+controller.listImage = DataUtil.getVerticalListData1()
+```
+
+Cách 2: Sử dụng withModels
+
+```sh
+var setImageSelected = HashSet<Int>()
+
+binding.verticalRecyclerView.withModels {
+    listImage.forEach { item ->
+        itemImage {
+            id(item.id)
+            url(item.src)
+            isFavorite(this@VerticalListController.setImageSelected.contains(item.id))
+            onClick { _ ->
+                if (setImageSelected.contains(item.id)) setImageSelected.remove(item.id)
+                else setImageSelected.add(item.id)
+                requestModelBuild()
+            }
+        }
+    }
+}
+```
+
+Vậy là bạn đã nắm qua được cách sử dụng Epoxy để xử lý các giao diện list cơ bản. 
+Hãy thử nghiệm các case trong project demo trên để nắm rõ hơn nữa khả năng của thư viện tuyệt vời này, các case trong project bao gồm:
+    + Basic vertical list + Move item
+    + Basic horizontal list
+    + Multi type item with nested list (unlimit horizontal lists inside a vertical list)
+    + Multi type item + custom span size in grid list
+    + List with expandable items that have list in expanded content
+
+
