@@ -3,7 +3,7 @@
 #### 1. Setup
 Thêm các phụ thuộc cần thiết vào build.gradle (Module :app)
 
-```json
+```sh
 plugins {
     id("kotlin-kapt")
 }
@@ -32,7 +32,7 @@ dependencies {
 }
 ```
 #### 2. Tạo 1 Interface hoặc object Config cho Epoxy
-```json
+```sh
 @EpoxyDataBindingPattern(rClass = R::class, layoutPrefix = "epoxy")
 object EpoxyDataBindingConfig
  ```
@@ -42,7 +42,7 @@ object EpoxyDataBindingConfig
 #### 3. Tạo Models
 - Tạo 1 layout cho item của mình. Ở đây lấy ví dụ là epoxy_item_image.xml
 
-```json
+```sh
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -87,7 +87,7 @@ object EpoxyDataBindingConfig
 Lưu ý sau khi tạo, nhớ build lại Project để dataBinding và Epoxy tạo ra các Models cho mình
 
 - Tạo 1 data class để lấy dữ liệu cần thiết
-```json
+```sh
 data class Image(
     val id: Int,
     val src: String,
@@ -113,7 +113,7 @@ data class Image(
 
 #### 5. Tạo 1 Controller cho EpoxyRecyclerView
 
-```json
+```sh
 package com.rekoj134.epoxydemonew.epoxy.controller
 
 import android.util.Log
@@ -156,3 +156,5 @@ class VerticalListController : EpoxyController() {
     }
 }
 ```
+
+Coming soon.....
