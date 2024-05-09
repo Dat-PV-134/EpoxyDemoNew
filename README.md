@@ -25,7 +25,6 @@ android {
 
 dependencies {
     implementation("com.airbnb.android:epoxy:5.1.4")
-    // Add the annotation processor if you are using Epoxy's annotations (recommended)
     kapt("com.airbnb.android:epoxy-processor:5.1.4")
     implementation("com.airbnb.android:epoxy-databinding:5.1.4")
 
