@@ -231,4 +231,4 @@ binding.verticalRecyclerView.withModels {
     - Multi type item + custom span size in grid list
     - List with expandable items that have list in expanded content
 
-
+    
