@@ -96,7 +96,7 @@ data class Image(
 ```
 
 #### 4. Tạo 1 EpoxyRecyclerView ở Activity muốn sử dụng RecyclerView
-```json
+```sh
 <com.airbnb.epoxy.EpoxyRecyclerView
             android:id="@+id/verticalRecyclerView"
             android:layout_width="match_parent"
@@ -157,4 +157,4 @@ class VerticalListController : EpoxyController() {
 }
 ```
 
-Coming soon.....
+To be continues, coming soon.....
