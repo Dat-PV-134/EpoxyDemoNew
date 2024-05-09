@@ -1,5 +1,10 @@
 ## Project demo cách sử dụng Epoxy với data trong việc thiết kế một số giao diện Recycler View cơ bản
 
+Đường dẫn tới lib Epoxy: 
+```sh
+https://github.com/airbnb/epoxy
+```
+
 #### 1. Setup
 Thêm các phụ thuộc cần thiết vào build.gradle (Module :app)
 
