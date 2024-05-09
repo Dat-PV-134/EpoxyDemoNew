@@ -220,8 +220,10 @@ binding.verticalRecyclerView.withModels {
 }
 ```
 
-## Vậy là bạn đã nắm qua được cách sử dụng Epoxy để xử lý các giao diện list cơ bản. 
-## Hãy thử nghiệm các case trong project demo trên để nắm rõ hơn nữa khả năng của thư viện tuyệt vời này, các case trong project bao gồm:
+
+
+### Vậy là bạn đã nắm qua được cách sử dụng Epoxy để xử lý các giao diện list cơ bản. 
+### Hãy thử nghiệm các case trong project demo trên để nắm rõ hơn nữa khả năng của thư viện tuyệt vời này, các case trong project bao gồm:
     - Basic vertical list + Move item
     - Basic horizontal list
     - Multi type item with nested list (unlimit horizontal lists inside a vertical list)
