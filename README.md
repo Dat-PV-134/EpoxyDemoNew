@@ -129,7 +129,7 @@ data class Image(
 
 #### 5. Tạo 1 Controller cho EpoxyRecyclerView
 
-Cách 1: Tạo 1 class Controller
+Cách 1: Tạo 1 class Controller (Cách này dành cho những list có nhiều logic xử lý phức tạp bên trong, đối với những list có logic bên trong đơn giản nên sử dụng cách 2)
 
 ```sh
 package com.rekoj134.epoxydemonew.epoxy.controller
@@ -175,8 +175,7 @@ class VerticalListController : EpoxyController() {
 }
 ```
 
-- Sau đó gọi setControllerAndBuildModels ở Epoxy RecyclerView. Và thế là xong =))) 
-(Cách 2 dành cho trường hợp list không quá phức tạp và sẽ còn ngắn gọn hơn nữa) 
+Sau đó gọi setControllerAndBuildModels ở Epoxy RecyclerView. Và thế là xong =))) 
 
 ```sh
 binding.verticalRecyclerView.setControllerAndBuildModels(VerticalListController())
